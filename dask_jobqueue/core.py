@@ -167,7 +167,7 @@ class Job(ProcessInterface, abc.ABC):
         if memory is None:
             memory = dask.config.get("jobqueue.%s.memory" % self.config_name)
 
-        if cores is None or memory is None:
+        if cores is None: # or memory is None:
             job_class_name = self.__class__.__name__
             cluster_class_name = job_class_name.replace("Job", "Cluster")
             raise ValueError(
@@ -247,7 +247,7 @@ class Job(ProcessInterface, abc.ABC):
         if processes is not None and processes > 1:
             command_args += ["--nprocs", processes]
 
-        command_args += ["--memory-limit", self.worker_process_memory]
+        # command_args += ["--memory-limit", self.worker_process_memory]
         command_args += ["--name", str(name)]
         command_args += ["--nanny" if nanny else "--no-nanny"]
 

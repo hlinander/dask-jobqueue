@@ -70,8 +70,8 @@ class SLURMJob(Job):
         )
         # Memory
         memory = job_mem
-        if job_mem is None:
-            memory = slurm_format_bytes_ceil(self.worker_memory)
+        # if job_mem is None:
+        #     memory = slurm_format_bytes_ceil(self.worker_memory)
         if memory is not None:
             header_lines.append("#SBATCH --mem=%s" % memory)
 
